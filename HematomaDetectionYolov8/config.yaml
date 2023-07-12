@@ -1,0 +1,8 @@
+path: C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/custom_data
+train: images/train
+val: images/val
+test: images/test
+
+# Classes
+names:
+  0: hematoma
