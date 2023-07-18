@@ -69,26 +69,6 @@ def apply_zoom(ippath, csvpath, oppath, scaling_depth):
             image = Image.open(image_path)
 
             # Calculate the zoom factor based on scaling depth
-            # zoom_factor = 1.0 / scaling_depth
-
-            # if scaling_depth == 0.8:
-            #     zoom_factor = 0.9 
-            # elif scaling_depth == 1:
-            #     zoom_factor = 1.0
-            # elif scaling_depth == 1.04:
-            #     zoom_factor = 1.04
-            # elif scaling_depth == 1.2:
-            #     zoom_factor = 1.1
-            # elif scaling_depth == 1.3:
-            #     zoom_factor = 1.15
-            # elif scaling_depth == 1.82:
-            #     zoom_factor = 1.32
-            # elif scaling_depth == 2.08:
-            #     zoom_factor = 1.4
-            # else:
-            #     zoom_factor = 1.45
-
-            # zoom_factor = scaling_depth
 
             zoom_factor = field_depth / scaling_depth
 

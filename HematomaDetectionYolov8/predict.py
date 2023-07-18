@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 
 
-model = YOLO("C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/runs/detect/train2/weights/best.pt")
+model = YOLO("C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/runs/detect/train4/weights/best.pt")
 
 # results = model(
 #     "C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/custom_data/images/test",

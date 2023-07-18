@@ -2,90 +2,112 @@ from PIL import Image
 import os
 import csv
 import math
+import numpy as np 
+import logging
 
-def getcropcoordinates(x1, y1, x2, y2):
+def check_consecutive_black_columns(crop_coords, og_img):
+    width = crop_coords[2] - crop_coords[0]
+    print(width)
+    image = og_img
+    # input()
+    x1, y1, x2, y2 = crop_coords
+    print(x1, y1, x2, y2)
+    # input()
+    for column_index in range(int(math.ceil(width/2)), x1-1, -1):
+        black_column_left = all(image.getpixel((column_index, y)) == 0 for y in range(y1,y2+1))
+        # print(black_column_left)
+        if black_column_left:
+                print(f'Black column in left found at: {column_index}')
+                diff = column_index - x1 - 1
+                x1 = column_index + 1
+                x2 = x2 + diff
+                break
+        # else:
+            # print('No black column in left found')
+    for column_index in range(int(math.floor(width/2)), x2+1):
+        # print(column_index)
+        black_column_left = all(image.getpixel((column_index, y)) == 0 for y in range(y1,y2+1))
+        if black_column_left:
+                print(f'Black column in right found at: {column_index}')
+                diff = x2 - column_index
+                x1 = x1 - diff - 1
+                x2 = column_index - 1
+                break
+        # else:
+            # print('No black column in right found')
+    print(x1, y1, x2, y2)
+    # input()
+    print(f'Width:{x2-x1}, Height:{y2-y1}')
+    return (x1, y1, x2, y2)
+
+def getcropcoordinates(bbox):
+    x1, y1, x2, y2 = bbox
     X = 690
     Y = 274
-    if y1 < 300:
-        y1 = y1+250
-        y2 = y2+250
     xdiff =  (690 - (x2 - x1))/2
     ydiff =  (274 - (y2 - y1))
-    # if (xdiff)%2 != 0:
-    #     xdiff = xdiff - 1
-    # if (ydiff)%2 != 0:
-    #     ydiff = ydiff - 1
     left = x1 - math.ceil(xdiff)
     right = x2 + math.floor(xdiff)
-    # left = x1 - (xdiff)/2
-    # right = x2 + (xdiff)/2
-    top = y1 - round((ydiff)*0.75)-1
-    bottom = y2 + round((ydiff)*0.25)
+    top = y1 - round((ydiff)*0.65)-1
+    bottom = y2 + round((ydiff)*0.35)
 
-
-    return left, top, right, bottom
+    return (left, top, right, bottom)
 
 def getxyxy(filename, csvpath):
     with open(csvpath) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for i, row in enumerate(csv_reader):
-                # print(row[0])
-                # print(filename)
-                # input()
             if row[0] == filename:
-                    # print(row[0], row[1], row[2], row[3], row[4])
-                    # input()
                 x1, y1, x2, y2 = int(round(float(row[1]))), int(round(float(row[2]))), int(round(float(row[3]))), int(round(float(row[4])))
                 print(f'Name:{filename}, X1:{x1}, Y1:{y1}, X2:{x2}, Y2:{y2}')
-                return x1, y1, x2, y2
+                return (x1, y1, x2, y2)
             else:
                 continue       
-    return 0, 0, 0, 0
+    return (0, 0, 0, 0)
 
 
 def scale_crop(ippath, oppath, csvpath):
     # Create the output folder if it doesn't exist
     if not os.path.exists(oppath):
         os.makedirs(oppath) 
+    c = 0
     for i, filename in enumerate(os.listdir(ippath)):
         if filename.endswith('.png'):
+            c += 1
             filepath = os.path.join(ippath, filename)
 
             # Read the image
-            img = Image.open(filepath)
+            og_img = Image.open(filepath)
             # print(filepath)
             # input()
             # Get the coordinates
-            x1, y1, x2, y2 = getxyxy(filename, csvpath)
-            if x1 == 0:
+            bbox = getxyxy(filename, csvpath)
+            if bbox[0] == 0:
                 continue
-            left, top, right, bottom = getcropcoordinates(x1, y1, x2, y2)
-            print(f'Left:{left}, Top:{top}, Right:{right}, Bottom:{bottom}')
+            crop_coords = getcropcoordinates(bbox)
+            # print(crop_coords)
+            # exit()
+            crop_coords = check_consecutive_black_columns(crop_coords, og_img)
+            print(f'Left:{crop_coords[0]}, Top:{crop_coords[1]}, Right:{crop_coords[2]}, Bottom:{crop_coords[3]}')
             # print(left, top, right, bottom)
             png_filename = filename.replace('zoomed_', 'scaled-')
             output_path = os.path.join(oppath, png_filename)
             # Crop the image to the desired size (690x275)
-            image = img.crop((left, top, right, bottom))
+            image = og_img.crop(crop_coords)
             image.save(output_path)
-            # input()
-            # Save the image as PNG with the same name as the DICOM file
-            # png_filename = os.path.splitext(filename)[0] + '.png'
-            # output_path = os.path.join(oppath, png_filename)   
-            # image.show()
-            # input()
-            # image.save(output_path)
-            # if i % 100 == 0:
-                # print(f'{i+1} Images Cropped')
-            print(f'{i+1} Images Cropped')
+            if c % 100 == 0:
+                print(f'{c} Images Cropped')
             
 
 
 if __name__ == '__main__':
     # ippath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25"
     
-    ippath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledCropTest"
-    oppath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledCropped25"
-    csvpath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25/coordinates.csv"
+    ippath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25"
+    oppath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledCropped25NewTest"
+    csvpath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25/CalculatedCoordinates.csv"
+
+    logging.basicConfig(filename='crop.log', filemode='w', format='%(asctime)s - %(message)s', level=logging.INFO)
 
     # Call the function to crop PNGs
     scale_crop(ippath, oppath, csvpath)

@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 import csv
 
-def extract_coordinates(oppath):
+def extract_coordinates(oppath, results):
     # Open the CSV file in write mode
     with open(oppath, 'w', newline='') as csvfile:
         fieldnames = ['File Name', 'X1', 'Y1', 'X2', 'Y2']
@@ -22,14 +22,17 @@ def extract_coordinates(oppath):
                 continue
 
 if __name__ == '__main__':
-    model = YOLO("C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/runs/detect/train2/weights/best.pt")
+    model = YOLO("C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/runs/detect/train4/weights/best.pt")
 
     results = model(
-        "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25/",
+        # "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25/",
+        "C:/Users/kkotkar1/Desktop/CropAllDicoms/DicomSlicesPNG",
         save=True,
         max_det=1,
         # save_crop=True,
         device="0",
+        save_txt=True,
         )
     
-    extract_coordinates("C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25/coordinates.csv")
+    # extract_coordinates("C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25/coordinates.csv", results)
+    extract_coordinates("C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/runs/detect/predict17/coordinates.csv", results)
