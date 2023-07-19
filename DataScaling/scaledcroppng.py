@@ -3,15 +3,14 @@ import os
 import csv
 import math
 import numpy as np 
-import logging
 
 def check_consecutive_black_columns(crop_coords, og_img):
     width = crop_coords[2] - crop_coords[0]
-    print(width)
+    # print(width)
     image = og_img
     # input()
     x1, y1, x2, y2 = crop_coords
-    print(x1, y1, x2, y2)
+    print(f'Original Crop: Left:{x1}, Top:{y1}, Right:{x2}, Bottom:{y2}')
     # input()
     for column_index in range(int(math.ceil(width/2)), x1-1, -1):
         black_column_left = all(image.getpixel((column_index, y)) == 0 for y in range(y1,y2+1))
@@ -35,7 +34,7 @@ def check_consecutive_black_columns(crop_coords, og_img):
                 break
         # else:
             # print('No black column in right found')
-    print(x1, y1, x2, y2)
+    print(f'Modified Crop: Left:{x1}, Top:{y1}, Right:{x2}, Bottom:{y2}')
     # input()
     print(f'Width:{x2-x1}, Height:{y2-y1}')
     return (x1, y1, x2, y2)
@@ -106,8 +105,6 @@ if __name__ == '__main__':
     ippath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25"
     oppath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledCropped25NewTest"
     csvpath = "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25/CalculatedCoordinates.csv"
-
-    logging.basicConfig(filename='crop.log', filemode='w', format='%(asctime)s - %(message)s', level=logging.INFO)
 
     # Call the function to crop PNGs
     scale_crop(ippath, oppath, csvpath)
