@@ -17,8 +17,8 @@ checkpoint = torch.load('outputs/best_model.pth', map_location=DEVICE)
 model.load_state_dict(checkpoint['model_state_dict'])
 model.to(DEVICE).eval()
 # directory where all the images are present
-DIR_TEST = 'data/Uno Cards.v2-raw.voc/test'
-test_images = glob.glob(f"{DIR_TEST}/*.jpg")
+DIR_TEST = 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/ModelData/test'
+test_images = glob.glob(f"{DIR_TEST}/*.png")
 print(f"Test instances: {len(test_images)}")
 # define the detection threshold...
 # ... any detection having score below this will be discarded
@@ -79,7 +79,7 @@ for i in range(len(test_images)):
                         2, lineType=cv2.LINE_AA)
         cv2.imshow('Prediction', orig_image)
         cv2.waitKey(1)
-        cv2.imwrite(f"inference_outputs/images/{image_name}.jpg", orig_image)
+        cv2.imwrite(f"inference_outputs/images/{image_name}.png", orig_image)
     print(f"Image {i+1} done...")
     print('-'*50)
 print('TEST PREDICTIONS COMPLETE')
