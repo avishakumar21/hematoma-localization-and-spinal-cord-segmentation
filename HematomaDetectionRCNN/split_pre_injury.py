@@ -19,9 +19,9 @@ def move_xml_files(xml_path, train_path, val_path, test_path):
             index += 1
             if index <= train_size:
                 shutil.move(image_path, os.path.join(train_path, image_filename))
-            if index > train_size and index <= val_size:
+            elif index > train_size and index <= val_size:
                 shutil.move(image_path, os.path.join(val_path, image_filename))
-            if index > val_size and index <= test_size:
+            elif index > val_size and index <= test_size:
                 shutil.move(image_path, os.path.join(test_path, image_filename))
 
 
