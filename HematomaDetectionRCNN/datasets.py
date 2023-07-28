@@ -1,4 +1,5 @@
 import torch
+import random
 import cv2
 import numpy as np
 import os
@@ -69,23 +70,36 @@ class CustomDataset(Dataset):
             yamx_final = (ymax/image_height)*self.height
             
             boxes.append([xmin_final, ymin_final, xmax_final, yamx_final])
-        
-        # bounding box to tensor
-        boxes = torch.as_tensor(boxes, dtype=torch.float32)
-        # area of the bounding boxes
-        area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
+        c = 0
+        if len(boxes) == 0:
+            c = 100
+            boxes = torch.zeros((0, 4), dtype=torch.float32)
+            #boxes = torch.as_tensor(boxes, dtype=torch.float32)
+            labels = torch.zeros([0], dtype=torch.int64)
+            #labels = torch.as_tensor(labels, dtype=torch.int64)
+            area = torch.zeros([0], dtype=torch.float32)
+            iscrowd = torch.zeros([0], dtype=torch.int64)
+        else:
+            # bounding box to tensor
+            boxes = torch.as_tensor(boxes, dtype=torch.float32)
+            # labels to tensor
+            labels = torch.as_tensor(labels, dtype=torch.int64)
+            # area of the bounding boxes
+            area = torch.as_tensor(boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
+            iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
+
+
         # no crowd instances
-        iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
-        # labels to tensor
-        labels = torch.as_tensor(labels, dtype=torch.int64)
+        # iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
+
         # prepare the final `target` dictionary
         target = {}
         target["boxes"] = boxes
         target["labels"] = labels
         target["area"] = area
         target["iscrowd"] = iscrowd
-        image_id = torch.tensor([idx])
-        target["image_id"] = image_id
+        target['image_id'] = torch.tensor([idx])
+        # target["image_id"] = image_id
         # apply the image transforms
         if self.transforms:
             sample = self.transforms(image = image_resized,
@@ -93,7 +107,23 @@ class CustomDataset(Dataset):
                                      labels = labels)
             image_resized = sample['image']
             target['boxes'] = torch.Tensor(sample['bboxes'])
-            
+        #print(target)
+        # input()
+        # if c == 100:
+        #     boxes = torch.zeros((0, 4), dtype=torch.float32)
+        #     #boxes = torch.as_tensor(boxes, dtype=torch.float32)
+        #     labels = torch.zeros([0], dtype=torch.int64)
+        #     #labels = torch.as_tensor(labels, dtype=torch.int64)
+        #     area = torch.zeros([0], dtype=torch.float32)
+        #     iscrowd = torch.zeros([0], dtype=torch.int64)
+        #     print('Found an empty image')
+        # print('torch size boxes')
+        # t = target['boxes']
+        # print(t)
+        # print('print label')
+        # l  = target["labels"]
+        # print(target['labels'])
+        # print(t.size())   
         return image_resized, target
     def __len__(self):
         return len(self.all_images)
@@ -149,7 +179,7 @@ if __name__ == '__main__':
         cv2.imshow('Image', image)
         cv2.waitKey(0)
         
-    NUM_SAMPLES_TO_VISUALIZE = 5
+    NUM_SAMPLES_TO_VISUALIZE = 2
     for i in range(NUM_SAMPLES_TO_VISUALIZE):
-        image, target = dataset[i]
+        image, target = dataset[random.randint(0, len(dataset))]
         visualize_sample(image, target)

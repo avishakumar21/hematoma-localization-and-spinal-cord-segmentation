@@ -79,7 +79,7 @@ for i in range(len(test_images)):
                         2, lineType=cv2.LINE_AA)
         cv2.imshow('Prediction', orig_image)
         cv2.waitKey(1)
-        cv2.imwrite(f"inference_outputs/images/{image_name}.png", orig_image)
+        cv2.imwrite(f"C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/RCNN test/inference_outputs/images/{image_name}.png", orig_image)
     print(f"Image {i+1} done...")
     print('-'*50)
 print('TEST PREDICTIONS COMPLETE')

@@ -50,7 +50,7 @@ class SaveBestModel:
                 'epoch': epoch+1,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
-                }, 'outputs/best_model.pth')
+                }, 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/RCNN test/outputs/best_model.pth')
 
 def collate_fn(batch):
     """

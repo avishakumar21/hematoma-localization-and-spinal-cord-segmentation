@@ -7,11 +7,16 @@ def create_true_negative_xml(image_filename, image_path, save_folder):
     width, height = image.size
 
     root = ET.Element("annotation")
+    
     folder = ET.SubElement(root, "folder")
     folder.text = "images"
-
+    
     filename = ET.SubElement(root, "filename")
     filename.text = image_filename
+    
+    # Add the path element here
+    path = ET.SubElement(root, "path")
+    path.text = image_path  # using the provided image path as the path text
 
     source = ET.SubElement(root, "source")
     database = ET.SubElement(source, "database")

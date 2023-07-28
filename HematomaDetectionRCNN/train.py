@@ -29,7 +29,22 @@ def train(train_data_loader, model):
         images, targets = data
         
         images = list(image.to(DEVICE) for image in images)
-        targets = [{k: v.to(DEVICE) for k, v in t.items()} for t in targets]
+        targets = [{k: v.to(DEVICE) for k, v in t.items()} for t in targets] # this tensor is passed through TO DEVICE (might be making 0 values to null -- causes dimension error)
+        #print(targets)
+        for t in targets:
+            #print(t['boxes'].size())
+            if t['boxes'].size() == torch.Size([0]):
+                boxes = torch.zeros((0, 4), dtype=torch.float32)
+                #boxes = torch.as_tensor(boxes, dtype=torch.float32)
+                labels = torch.zeros([0], dtype=torch.int64)
+                #labels = torch.as_tensor(labels, dtype=torch.int64)
+                area = torch.zeros([0], dtype=torch.float32)
+                iscrowd = torch.zeros([0], dtype=torch.int64)
+                t["boxes"] = boxes.to(DEVICE)
+                t["labels"] = labels.to(DEVICE)
+                t["area"] = area.to(DEVICE)
+                t["iscrowd"] = iscrowd.to(DEVICE)
+        
         loss_dict = model(images, targets)
         losses = sum(loss for loss in loss_dict.values())
         loss_value = losses.item()
@@ -58,7 +73,18 @@ def validate(valid_data_loader, model):
         
         images = list(image.to(DEVICE) for image in images)
         targets = [{k: v.to(DEVICE) for k, v in t.items()} for t in targets]
-        
+        for t in targets:
+            if t['boxes'].size() == torch.Size([0]):
+                boxes = torch.zeros((0, 4), dtype=torch.float32)
+                #boxes = torch.as_tensor(boxes, dtype=torch.float32)
+                labels = torch.zeros([0], dtype=torch.int64)
+                #labels = torch.as_tensor(labels, dtype=torch.int64)
+                area = torch.zeros([0], dtype=torch.float32)
+                iscrowd = torch.zeros([0], dtype=torch.int64)
+                t["boxes"] = boxes.to(DEVICE)
+                t["labels"] = labels.to(DEVICE)
+                t["area"] = area.to(DEVICE)
+                t["iscrowd"] = iscrowd.to(DEVICE)
         with torch.no_grad():
             loss_dict = model(images, targets)
         losses = sum(loss for loss in loss_dict.values())
