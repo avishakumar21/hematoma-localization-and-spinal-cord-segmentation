@@ -82,15 +82,31 @@ class CustomDataset(Dataset):
             
             boxes.append([xmin_final, ymin_final, xmax_final, ymax_final])
         
-        # Bounding box to tensor.
-        boxes = torch.as_tensor(boxes, dtype=torch.float32)
-        # Area of the bounding boxes.
-        area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0]) if len(boxes) > 0 \
-            else torch.as_tensor(boxes, dtype=torch.float32)
-        # No crowd instances.
-        iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
-        # Labels to tensor.
-        labels = torch.as_tensor(labels, dtype=torch.int64)
+        # # Bounding box to tensor.
+        # boxes = torch.as_tensor(boxes, dtype=torch.float32)
+        # # Area of the bounding boxes.
+        # area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0]) if len(boxes) > 0 \
+        #     else torch.as_tensor(boxes, dtype=torch.float32)
+        # # No crowd instances.
+        # iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
+        # # Labels to tensor.
+        # labels = torch.as_tensor(labels, dtype=torch.int64)
+
+        if len(boxes) == 0:
+            boxes = torch.zeros((0, 4), dtype=torch.float32)
+            #boxes = torch.as_tensor(boxes, dtype=torch.float32)
+            labels = torch.zeros([0], dtype=torch.int64)
+            #labels = torch.as_tensor(labels, dtype=torch.int64)
+            area = torch.zeros([0], dtype=torch.float32)
+            iscrowd = torch.zeros([0], dtype=torch.int64)
+        else:
+            # bounding box to tensor
+            boxes = torch.as_tensor(boxes, dtype=torch.float32)
+            # labels to tensor
+            labels = torch.as_tensor(labels, dtype=torch.int64)
+            # area of the bounding boxes
+            area = torch.as_tensor(boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
+            iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
 
         # Prepare the final `target` dictionary.
         target = {}
@@ -127,6 +143,11 @@ def create_valid_dataset(DIR):
         DIR, RESIZE_TO, RESIZE_TO, CLASSES, get_valid_transform()
     )
     return valid_dataset
+def create_test_dataset(DIR):
+    test_dataset = CustomDataset(
+        DIR, RESIZE_TO, RESIZE_TO, CLASSES, get_valid_transform()
+    )
+    return test_dataset
 def create_train_loader(train_dataset, num_workers=0):
     train_loader = DataLoader(
         train_dataset,
@@ -147,7 +168,16 @@ def create_valid_loader(valid_dataset, num_workers=0):
         drop_last=False
     )
     return valid_loader
-
+def create_test_loader(test_dataset, num_workers=0):
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=BATCH_SIZE,
+        shuffle=False,
+        num_workers=num_workers,
+        collate_fn=collate_fn,
+        drop_last=False
+    )
+    return test_loader
 
 # execute `datasets.py`` using Python command from 
 # Terminal to visualize sample images

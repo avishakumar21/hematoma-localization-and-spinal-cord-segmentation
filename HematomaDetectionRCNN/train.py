@@ -11,6 +11,7 @@ from datasets import (
     create_train_dataset, create_valid_dataset, 
     create_train_loader, create_valid_loader, CustomDataset
 )
+
 import torch
 import glob as glob
 import matplotlib.pyplot as plt
@@ -71,6 +72,7 @@ def train(train_data_loader, model):
     return train_loss_list
 
 
+
     # function for running validation iterations
 def validate(valid_data_loader, model):
     print('Validating')
@@ -104,15 +106,6 @@ def validate(valid_data_loader, model):
         
         with torch.no_grad():
             outputs = model(images, targets)
-
-        # losses = sum(loss for loss in outputs.values())
-        # loss_value = losses.item()
-        # val_loss_list.append(loss_value)
-        # val_loss_hist.send(loss_value)
-        # val_itr += 1
-
-        # # update the loss value beside the progress bar for each iteration
-        # prog_bar.set_description(desc=f"Loss: {loss_value:.4f}")
 
         # For mAP calculation using Torchmetrics.
         #####################################

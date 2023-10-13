@@ -12,6 +12,8 @@ TRAIN_DIR = 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localiza
 # Validation images and XML files directory.
 VALID_DIR = 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/ModelData/val'
 
+TEST_DIR = 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/ModelData/test'
+
 # Classes: 0 index is reserved for background.
 CLASSES = [
     '__background__', 'hematoma'
@@ -23,4 +25,4 @@ NUM_CLASSES = len(CLASSES)
 VISUALIZE_TRANSFORMED_IMAGES = True
 
 # Location to save model and plots.
-OUT_DIR = 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/HematomaDetectionSSD/outputs'
+OUT_DIR = 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/hematoma-localization-and-spinal-cord-segmentation/HematomaDetectionSSD/outputs'
