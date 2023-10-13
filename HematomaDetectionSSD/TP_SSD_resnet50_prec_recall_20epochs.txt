@@ -1,0 +1,929 @@
+SSD(
+  (backbone): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)   
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (4): Sequential(
+      (0): Bottleneck(
+        (conv1): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (downsample): Sequential(
+          (0): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): Bottleneck(
+        (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (2): Bottleneck(
+        (conv1): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+    )
+    (5): Sequential(
+      (0): Bottleneck(
+        (conv1): Conv2d(256, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (downsample): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): Bottleneck(
+        (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (2): Bottleneck(
+        (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (3): Bottleneck(
+        (conv1): Conv2d(512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+    )
+    (6): Sequential(
+      (0): Bottleneck(
+        (conv1): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (downsample): Sequential(
+          (0): Conv2d(512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (2): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (3): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (4): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (5): Bottleneck(
+        (conv1): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(1024, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+    )
+    (7): Sequential(
+      (0): Bottleneck(
+        (conv1): Conv2d(1024, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (downsample): Sequential(
+          (0): Conv2d(1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): Bottleneck(
+        (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+      (2): Bottleneck(
+        (conv1): Conv2d(2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (conv3): Conv2d(512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (bn3): BatchNorm2d(2048, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+      )
+    )
+  )
+  (anchor_generator): DefaultBoxGenerator(aspect_ratios=[[2], [2, 3], [2, 3], [2, 3], [2], [2]], clip=True, scales=[0.15, 0.3, 0.44999999999999996, 0.6, 0.75, 0.9, 1.0], steps=None)
+  (head): SSDHead(
+    (classification_head): SSDClassificationHead(
+      (module_list): ModuleList(
+        (0): Conv2d(2048, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): Conv2d(1024, 12, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (2): Conv2d(512, 12, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (3): Conv2d(256, 12, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4-5): 2 x Conv2d(256, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+    (regression_head): SSDRegressionHead(
+      (module_list): ModuleList(
+        (0): Conv2d(2048, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): Conv2d(1024, 24, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (2): Conv2d(512, 24, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (3): Conv2d(256, 24, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4-5): 2 x Conv2d(256, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+  )
+  (transform): GeneralizedRCNNTransform(
+      Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+      Resize(min_size=(640,), max_size=640, mode='bilinear')
+  )
+)
+24,641,780 total parameters.
+24,641,780 training parameters.
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 1 of 20
+Training
+Loss: 4.2181: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:37<00:00,  2.49s/it]
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.95s/it]
+Epoch #1 train loss: 6.521
+Epoch #1 mAP@0.50:0.95: 0.15222176909446716
+Epoch #1 mAP@0.50: 0.6037894487380981
+Took 1.055 minutes for epoch 0
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:31  model_time: 0.6021 (0.6021)  evaluator_time: 0.0120 (0.0120)  time: 15.1731  data: 14.5150  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2300 (0.3148)  evaluator_time: 0.0120 (0.0105)  time: 2.7748  data: 2.4260  max mem: 11121
+Test: Total time: 0:00:17 (2.8425 s / it)
+Averaged stats: model_time: 0.2300 (0.3148)  evaluator_time: 0.0120 (0.0105)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.152
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.604
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.005
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.133
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.161
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.254
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.320
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.327
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.131
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.373
+
+BEST VALIDATION mAP: 0.15222176909446716
+
+SAVING BEST MODEL FOR EPOCH: 1
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 2 of 20
+Training
+Loss: 2.9623: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:32<00:00,  2.19s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.98s/it]
+Epoch #2 train loss: 3.426
+Epoch #2 mAP@0.50:0.95: 0.34510770440101624
+Epoch #2 mAP@0.50: 0.8320158123970032
+Took 0.973 minutes for epoch 1
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:09  model_time: 0.7710 (0.7710)  evaluator_time: 0.0080 (0.0080)  time: 11.5988  data: 10.7738  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2310 (0.2940)  evaluator_time: 0.0070 (0.0068)  time: 2.1268  data: 1.8024  max mem: 11121
+Test: Total time: 0:00:13 (2.1988 s / it)
+Averaged stats: model_time: 0.2310 (0.2940)  evaluator_time: 0.0070 (0.0068)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.345
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.832
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.148
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.227
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.385
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.427
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.443
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.443
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.231
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.494
+
+BEST VALIDATION mAP: 0.34510770440101624
+
+SAVING BEST MODEL FOR EPOCH: 2
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 3 of 20
+Training
+Loss: 2.0552: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.22s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.96s/it]
+Epoch #3 train loss: 2.577
+Epoch #3 mAP@0.50:0.95: 0.4812265932559967
+Epoch #3 mAP@0.50: 0.9843834042549133     
+Took 0.971 minutes for epoch 2
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.5080 (0.5080)  evaluator_time: 0.0050 (0.0050)  time: 11.2646  data: 10.7086  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2300 (0.2478)  evaluator_time: 0.0060 (0.0050)  time: 2.0673  data: 1.7916  max mem: 11121
+Test: Total time: 0:00:12 (2.1371 s / it)
+Averaged stats: model_time: 0.2300 (0.2478)  evaluator_time: 0.0060 (0.0050)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.481
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.984
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.334
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.406
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.508
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.559
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.561
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.561
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.431
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.593
+
+BEST VALIDATION mAP: 0.4812265932559967
+
+SAVING BEST MODEL FOR EPOCH: 3
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 4 of 20
+Training
+Loss: 1.4783: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.23s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.95s/it]
+Epoch #4 train loss: 1.900
+Epoch #4 mAP@0.50:0.95: 0.5614956021308899
+Epoch #4 mAP@0.50: 0.9957552552223206
+Took 0.971 minutes for epoch 3
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.4992 (0.4992)  evaluator_time: 0.0040 (0.0040)  time: 11.2650  data: 10.7178  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2320 (0.2755)  evaluator_time: 0.0040 (0.0040)  time: 2.0962  data: 1.7928  max mem: 11121
+Test: Total time: 0:00:13 (2.1673 s / it)
+Averaged stats: model_time: 0.2320 (0.2755)  evaluator_time: 0.0040 (0.0040)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.561
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.996
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.532
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.488
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.580
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.631
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.637
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.637
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.512
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.667
+
+BEST VALIDATION mAP: 0.5614956021308899
+
+SAVING BEST MODEL FOR EPOCH: 4
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 5 of 20
+Training
+Loss: 1.2212: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.23s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.94s/it]
+Epoch #5 train loss: 1.407
+Epoch #5 mAP@0.50:0.95: 0.6368794441223145
+Epoch #5 mAP@0.50: 0.9990895986557007
+Took 0.971 minutes for epoch 4
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.4451 (0.4451)  evaluator_time: 0.0040 (0.0040)  time: 11.2408  data: 10.7488  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2300 (0.2367)  evaluator_time: 0.0050 (0.0042)  time: 2.0615  data: 1.7976  max mem: 11121
+Test: Total time: 0:00:12 (2.1315 s / it)
+Averaged stats: model_time: 0.2300 (0.2367)  evaluator_time: 0.0050 (0.0042)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.637
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.999
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.669
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.582
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.654
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.678
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.683
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.683
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.594
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.704
+
+BEST VALIDATION mAP: 0.6368794441223145
+
+SAVING BEST MODEL FOR EPOCH: 5
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 6 of 20
+Training
+Loss: 1.4791: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.21s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.94s/it]
+Epoch #6 train loss: 1.201
+Epoch #6 mAP@0.50:0.95: 0.616205632686615
+Epoch #6 mAP@0.50: 0.9978707432746887
+Took 0.967 minutes for epoch 5
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.3970 (0.3970)  evaluator_time: 0.0050 (0.0050)  time: 11.3259  data: 10.8820  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2310 (0.2288)  evaluator_time: 0.0040 (0.0042)  time: 2.0775  data: 1.8215  max mem: 11121
+Test: Total time: 0:00:12 (2.1453 s / it)
+Averaged stats: model_time: 0.2310 (0.2288)  evaluator_time: 0.0040 (0.0042)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.616
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.998
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.748
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.530
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.640
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.664
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.671
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.671
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.544
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.701
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 7 of 20
+Training
+Loss: 0.8081: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.22s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.88s/it]
+Epoch #7 train loss: 1.002
+Epoch #7 mAP@0.50:0.95: 0.6639623045921326
+Epoch #7 mAP@0.50: 0.9969691038131714
+Took 0.962 minutes for epoch 6
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.5460 (0.5460)  evaluator_time: 0.0040 (0.0040)  time: 11.3238  data: 10.7268  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2300 (0.2525)  evaluator_time: 0.0040 (0.0035)  time: 2.0748  data: 1.7951  max mem: 11121
+Test: Total time: 0:00:12 (2.1478 s / it)
+Averaged stats: model_time: 0.2300 (0.2525)  evaluator_time: 0.0040 (0.0035)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.664
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.997
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.817
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.590
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.685
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.706
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.713
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.713
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.613
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.737
+
+BEST VALIDATION mAP: 0.6639623045921326
+
+SAVING BEST MODEL FOR EPOCH: 7
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 8 of 20
+Training
+Loss: 0.8259: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:32<00:00,  2.19s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.89s/it]
+Epoch #8 train loss: 0.878
+Epoch #8 mAP@0.50:0.95: 0.6678568124771118
+Epoch #8 mAP@0.50: 0.9801980257034302
+Took 0.956 minutes for epoch 7
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.5730 (0.5730)  evaluator_time: 0.0040 (0.0040)  time: 11.2801  data: 10.6591  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2300 (0.2585)  evaluator_time: 0.0040 (0.0037)  time: 2.0689  data: 1.7837  max mem: 11121
+Test: Total time: 0:00:12 (2.1375 s / it)
+Averaged stats: model_time: 0.2300 (0.2585)  evaluator_time: 0.0040 (0.0037)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.668
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.980
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.830
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.637
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.680
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.723
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.723
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.723
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.650
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.740
+
+BEST VALIDATION mAP: 0.6678568124771118
+
+SAVING BEST MODEL FOR EPOCH: 8
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 9 of 20
+Training
+Loss: 0.8137: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.22s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.95s/it]
+Epoch #9 train loss: 0.792
+Epoch #9 mAP@0.50:0.95: 0.676841676235199
+Epoch #9 mAP@0.50: 0.9801980257034302
+Took 0.968 minutes for epoch 8
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:09  model_time: 0.5540 (0.5540)  evaluator_time: 0.0040 (0.0040)  time: 11.5093  data: 10.9083  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2300 (0.2540)  evaluator_time: 0.0040 (0.0040)  time: 2.1057  data: 1.8242  max mem: 11121
+Test: Total time: 0:00:13 (2.1751 s / it)
+Averaged stats: model_time: 0.2300 (0.2540)  evaluator_time: 0.0040 (0.0040)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.677
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.980
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.814
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.627
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.695
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.727
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.727
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.727
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.644
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.746
+
+BEST VALIDATION mAP: 0.676841676235199
+
+SAVING BEST MODEL FOR EPOCH: 9
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 10 of 20
+Training
+Loss: 0.6879: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.23s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.95s/it]
+Epoch #10 train loss: 0.666
+Epoch #10 mAP@0.50:0.95: 0.6806380152702332
+Epoch #10 mAP@0.50: 0.9984598159790039
+Took 0.973 minutes for epoch 9
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:08  model_time: 0.4810 (0.4810)  evaluator_time: 0.0040 (0.0040)  time: 11.3492  data: 10.8212  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2310 (0.2435)  evaluator_time: 0.0040 (0.0038)  time: 2.0812  data: 1.8105  max mem: 11121
+Test: Total time: 0:00:12 (2.1494 s / it)
+Averaged stats: model_time: 0.2310 (0.2435)  evaluator_time: 0.0040 (0.0038)
+Accumulating evaluation results...
+DONE (t=0.00s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.681
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.998
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.813
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.654
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.692
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.720
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.728
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.728
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.688
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.737
+
+BEST VALIDATION mAP: 0.6806380152702332
+
+SAVING BEST MODEL FOR EPOCH: 10
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 11 of 20
+Training
+Loss: 0.5208: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.21s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.95s/it]
+Epoch #11 train loss: 0.668
+Epoch #11 mAP@0.50:0.95: 0.6968684792518616
+Epoch #11 mAP@0.50: 0.9993093013763428
+Took 0.966 minutes for epoch 10
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.5050 (0.5050)  evaluator_time: 0.0040 (0.0040)  time: 11.1886  data: 10.6357  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2310 (0.2482)  evaluator_time: 0.0040 (0.0039)  time: 2.0549  data: 1.7798  max mem: 11121
+Test: Total time: 0:00:12 (2.1223 s / it)
+Averaged stats: model_time: 0.2310 (0.2482)  evaluator_time: 0.0040 (0.0039)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.697
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.999
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.820
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.623
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.718
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.735
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.743
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.743
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.637
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.769
+
+BEST VALIDATION mAP: 0.6968684792518616
+
+SAVING BEST MODEL FOR EPOCH: 11
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 12 of 20
+Training
+Loss: 0.6359: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.21s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.95s/it]
+Epoch #12 train loss: 0.637
+Epoch #12 mAP@0.50:0.95: 0.6757233738899231
+Epoch #12 mAP@0.50: 0.9801980257034302
+Took 0.967 minutes for epoch 11
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:06  model_time: 0.4800 (0.4800)  evaluator_time: 0.0040 (0.0040)  time: 11.0955  data: 10.5665  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2320 (0.2427)  evaluator_time: 0.0040 (0.0035)  time: 2.0494  data: 1.7792  max mem: 11121
+Test: Total time: 0:00:12 (2.1201 s / it)
+Averaged stats: model_time: 0.2320 (0.2427)  evaluator_time: 0.0040 (0.0035)
+Accumulating evaluation results...
+DONE (t=0.00s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.676
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.980
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.848
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.634
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.693
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.733
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.733
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.733
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.650
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.752
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 13 of 20
+Training
+Loss: 0.3571: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.21s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.92s/it]
+Epoch #13 train loss: 0.550
+Epoch #13 mAP@0.50:0.95: 0.6973212361335754
+Epoch #13 mAP@0.50: 0.9997642636299133
+Took 0.965 minutes for epoch 12
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:06  model_time: 0.5899 (0.5899)  evaluator_time: 0.0040 (0.0040)  time: 11.0978  data: 10.4578  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2309 (0.2635)  evaluator_time: 0.0040 (0.0035)  time: 2.0413  data: 1.7505  max mem: 11121
+Test: Total time: 0:00:12 (2.1098 s / it)
+Averaged stats: model_time: 0.2309 (0.2635)  evaluator_time: 0.0040 (0.0035)
+Accumulating evaluation results...
+DONE (t=0.00s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.697
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 1.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.856
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.661
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.709
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.745
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.753
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.753
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.700
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.766
+
+BEST VALIDATION mAP: 0.6973212361335754
+
+SAVING BEST MODEL FOR EPOCH: 13
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 14 of 20
+Training
+Loss: 0.4080: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:32<00:00,  2.19s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:26<00:00,  4.43s/it]
+Epoch #14 train loss: 0.538
+Epoch #14 mAP@0.50:0.95: 0.7219052910804749
+Epoch #14 mAP@0.50: 1.0
+Took 1.009 minutes for epoch 13
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.5590 (0.5590)  evaluator_time: 0.0040 (0.0040)  time: 11.3282  data: 10.7242  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2301 (0.2552)  evaluator_time: 0.0040 (0.0037)  time: 2.0755  data: 1.7943  max mem: 11121
+Test: Total time: 0:00:12 (2.1422 s / it)
+Averaged stats: model_time: 0.2301 (0.2552)  evaluator_time: 0.0040 (0.0037)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.722
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 1.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.872
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.668
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.740
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.771
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.771
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.771
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.675
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.794
+
+BEST VALIDATION mAP: 0.7219052910804749
+
+SAVING BEST MODEL FOR EPOCH: 14
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 15 of 20
+Training
+Loss: 0.8197: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.22s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:24<00:00,  4.05s/it]
+Epoch #15 train loss: 0.508
+Epoch #15 mAP@0.50:0.95: 0.7054249048233032
+Epoch #15 mAP@0.50: 0.9990895986557007
+Took 0.978 minutes for epoch 14
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:08  model_time: 0.4540 (0.4540)  evaluator_time: 0.0050 (0.0050)  time: 11.3912  data: 10.8892  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2420 (0.2488)  evaluator_time: 0.0040 (0.0040)  time: 2.0974  data: 1.8212  max mem: 11121
+Test: Total time: 0:00:12 (2.1650 s / it)
+Averaged stats: model_time: 0.2420 (0.2488)  evaluator_time: 0.0040 (0.0040)
+Accumulating evaluation results...
+DONE (t=0.00s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.705
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.999
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.871
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.656
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.724
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.755
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.755
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.755
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.656
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.779
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 16 of 20
+Training
+Loss: 0.4432: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.20s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  4.00s/it]
+Epoch #16 train loss: 0.506
+Epoch #16 mAP@0.50:0.95: 0.7057660818099976
+Epoch #16 mAP@0.50: 0.9993093013763428
+Took 0.968 minutes for epoch 15
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.4340 (0.4340)  evaluator_time: 0.0040 (0.0040)  time: 11.2643  data: 10.7833  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2340 (0.2388)  evaluator_time: 0.0040 (0.0040)  time: 2.0699  data: 1.8042  max mem: 11121
+Test: Total time: 0:00:12 (2.1422 s / it)
+Averaged stats: model_time: 0.2340 (0.2388)  evaluator_time: 0.0040 (0.0040)
+Accumulating evaluation results...
+DONE (t=0.00s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.706
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.999
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.850
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.635
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.728
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.749
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.749
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.749
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.644
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.775
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 17 of 20
+Training
+Loss: 0.4226: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.24s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.99s/it]
+Epoch #17 train loss: 0.452
+Epoch #17 mAP@0.50:0.95: 0.7093374133110046
+Epoch #17 mAP@0.50: 0.9801980257034302
+Took 0.980 minutes for epoch 16
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:09  model_time: 0.4860 (0.4860)  evaluator_time: 0.0040 (0.0040)  time: 11.5827  data: 11.0467  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2309 (0.2481)  evaluator_time: 0.0040 (0.0035)  time: 2.1231  data: 1.8484  max mem: 11121
+Test: Total time: 0:00:13 (2.1938 s / it)
+Averaged stats: model_time: 0.2309 (0.2481)  evaluator_time: 0.0040 (0.0035)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.709
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.980
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.861
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.676
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.722
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.758
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.758
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.758
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.694
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.773
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 18 of 20
+Training
+Loss: 0.4082: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.21s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.89s/it]
+Epoch #18 train loss: 0.422
+Epoch #18 mAP@0.50:0.95: 0.7250782251358032
+Epoch #18 mAP@0.50: 0.9995340704917908
+Took 0.961 minutes for epoch 17
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:08  model_time: 0.4460 (0.4460)  evaluator_time: 0.0050 (0.0050)  time: 11.4495  data: 10.9575  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2330 (0.2403)  evaluator_time: 0.0040 (0.0038)  time: 2.1007  data: 1.8336  max mem: 11121
+Test: Total time: 0:00:13 (2.1704 s / it)
+Averaged stats: model_time: 0.2330 (0.2403)  evaluator_time: 0.0040 (0.0038)
+Accumulating evaluation results...
+DONE (t=0.00s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.725
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 1.000
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.839
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.654
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.746
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.767
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.767
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.767
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.669
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.791
+
+BEST VALIDATION mAP: 0.7250782251358032
+
+SAVING BEST MODEL FOR EPOCH: 18
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 19 of 20
+Training
+Loss: 0.3367: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.23s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.97s/it]
+Epoch #19 train loss: 0.419
+Epoch #19 mAP@0.50:0.95: 0.6892357468605042
+Epoch #19 mAP@0.50: 0.9801980257034302
+Took 0.973 minutes for epoch 18
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:07  model_time: 0.4850 (0.4850)  evaluator_time: 0.0050 (0.0050)  time: 11.2972  data: 10.7653  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2300 (0.2478)  evaluator_time: 0.0040 (0.0037)  time: 2.0775  data: 1.8022  max mem: 11121
+Test: Total time: 0:00:12 (2.1472 s / it)
+Averaged stats: model_time: 0.2300 (0.2478)  evaluator_time: 0.0040 (0.0037)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.689
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.980
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.824
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.681
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.700
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.740
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.740
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.740
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.694
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.751
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 20 of 20
+Training
+Loss: 0.4117: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:32<00:00,  2.19s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.87s/it]
+Epoch #20 train loss: 0.392
+Epoch #20 mAP@0.50:0.95: 0.7080346941947937
+Epoch #20 mAP@0.50: 0.9801980257034302
+Took 0.953 minutes for epoch 19
+creating index...
+index created!
+Test:  [0/6]  eta: 0:01:06  model_time: 0.4941 (0.4941)  evaluator_time: 0.0040 (0.0040)  time: 11.0833  data: 10.5353  max mem: 11121
+Test:  [5/6]  eta: 0:00:02  model_time: 0.2330 (0.2470)  evaluator_time: 0.0040 (0.0035)  time: 2.0372  data: 1.7624  max mem: 11121
+Test: Total time: 0:00:12 (2.1056 s / it)
+Averaged stats: model_time: 0.2330 (0.2470)  evaluator_time: 0.0040 (0.0035)
+Accumulating evaluation results...
+DONE (t=0.01s).
+IoU metric: bbox
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.708
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.980
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.862
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.681
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.720
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.753
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.753
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.753
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = -1.000
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.694
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.767
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.

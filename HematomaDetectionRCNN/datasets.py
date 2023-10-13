@@ -6,7 +6,7 @@ import os
 import glob as glob
 from xml.etree import ElementTree as et
 from config import (
-    CLASSES, RESIZE_TO, TRAIN_DIR, VALID_DIR, BATCH_SIZE
+    CLASSES, RESIZE_TO, TRAIN_DIR, VALID_DIR, TEST_DIR, BATCH_SIZE
 )
 from torch.utils.data import Dataset, DataLoader
 from custom_utils import collate_fn, get_train_transform, get_valid_transform
@@ -134,6 +134,9 @@ def create_train_dataset():
 def create_valid_dataset():
     valid_dataset = CustomDataset(VALID_DIR, RESIZE_TO, RESIZE_TO, CLASSES, get_valid_transform())
     return valid_dataset
+def create_test_dataset():
+    test_dataset = CustomDataset(TEST_DIR, RESIZE_TO, RESIZE_TO, CLASSES, get_valid_transform())
+    return test_dataset
 def create_train_loader(train_dataset, num_workers=0):
     train_loader = DataLoader(
         train_dataset,
@@ -152,6 +155,15 @@ def create_valid_loader(valid_dataset, num_workers=0):
         collate_fn=collate_fn
     )
     return valid_loader
+def create_test_loader(test_dataset, num_workers=0):
+    test_loader = DataLoader(
+        test_dataset,
+        batch_size=BATCH_SIZE,
+        shuffle=False,
+        num_workers=num_workers,
+        collate_fn=collate_fn
+    )
+    return test_loader
 # execute datasets.py using Python command from Terminal...
 # ... to visualize sample images
 # USAGE: python datasets.py

@@ -2,6 +2,8 @@ import os
 import pandas as pd
 import xml.etree.ElementTree as ET
 
+# This file is for reading the unnormalized coordinates which are indicated in the CSV file (X1, X2, Y1, Y2)
+
 # Load the CSV file
 df = pd.read_csv('/Users/avishakumar/Documents/dicom_images/CalculatedCoordinates.csv')
 

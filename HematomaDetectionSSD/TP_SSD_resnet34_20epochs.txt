@@ -1,0 +1,453 @@
+PS C:\Users\akumar80\Documents\Avisha Kumar Lab Work\hematoma localization\HematomaDetectionSSD> & C:/Users/akumar80/Documents/Software/envs/snakesDL/python.exe "c:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/HematomaDetectionSSD/train.py"
+Number of training samples: 236
+Number of validation samples: 83
+
+SSD(
+  (backbone): Sequential(
+    (0): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+    (1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (2): ReLU(inplace=True)
+    (3): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+    (4): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (5): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (3): BasicBlock(
+        (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (6): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (3): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (4): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (5): BasicBlock(
+        (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (7): Sequential(
+      (0): BasicBlock(
+        (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (downsample): Sequential(
+          (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+          (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        )
+      )
+      (1): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+      (2): BasicBlock(
+        (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+        (relu): ReLU(inplace=True)
+        (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+        (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (anchor_generator): DefaultBoxGenerator(aspect_ratios=[[2], [2, 3], [2, 3], [2, 3], [2], [2]], clip=True, scales=[0.15, 0.3, 0.44999999999999996, 0.6, 0.75, 0.9, 1.0], steps=None)
+  (head): SSDHead(
+    (classification_head): SSDClassificationHead(
+      (module_list): ModuleList(
+        (0): Conv2d(512, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1-3): 3 x Conv2d(512, 12, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4-5): 2 x Conv2d(512, 8, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+    (regression_head): SSDRegressionHead(
+      (module_list): ModuleList(
+        (0): Conv2d(512, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1-3): 3 x Conv2d(512, 24, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (4-5): 2 x Conv2d(512, 16, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      )
+    )
+  )
+  (transform): GeneralizedRCNNTransform(
+      Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+      Resize(min_size=(640,), max_size=640, mode='bilinear')
+  )
+)
+22,114,292 total parameters.
+22,114,292 training parameters.
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 1 of 20
+Training
+Loss: 4.2331: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:31<00:00,  2.10s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:22<00:00,  3.77s/it]
+Epoch #1 train loss: 9.135
+Epoch #1 mAP@0.50:0.95: 0.055693961679935455
+Epoch #1 mAP@0.50: 0.2559206485748291
+Took 0.938 minutes for epoch 0
+
+BEST VALIDATION mAP: 0.055693961679935455
+
+SAVING BEST MODEL FOR EPOCH: 1
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 2 of 20
+Training
+Loss: 3.4666: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.94s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.84s/it]
+Epoch #2 train loss: 3.695
+Epoch #2 mAP@0.50:0.95: 0.29795002937316895
+Epoch #2 mAP@0.50: 0.727583646774292
+Took 0.899 minutes for epoch 1
+
+BEST VALIDATION mAP: 0.29795002937316895
+
+SAVING BEST MODEL FOR EPOCH: 2
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 3 of 20
+Training
+Loss: 2.5770: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.95s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.84s/it]
+Epoch #3 train loss: 2.941
+Epoch #3 mAP@0.50:0.95: 0.4356575012207031
+Epoch #3 mAP@0.50: 0.9242468476295471
+Took 0.895 minutes for epoch 2
+
+BEST VALIDATION mAP: 0.4356575012207031
+
+SAVING BEST MODEL FOR EPOCH: 3
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 4 of 20
+Training
+Loss: 1.9906: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:28<00:00,  1.93s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.93s/it]
+Epoch #4 train loss: 2.356
+Epoch #4 mAP@0.50:0.95: 0.47899505496025085
+Epoch #4 mAP@0.50: 0.9954218864440918
+Took 0.896 minutes for epoch 3
+
+BEST VALIDATION mAP: 0.47899505496025085
+
+SAVING BEST MODEL FOR EPOCH: 4
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 5 of 20
+Training
+Loss: 1.6455: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.93s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.90s/it]
+Epoch #5 train loss: 1.859
+Epoch #5 mAP@0.50:0.95: 0.6064222455024719
+Epoch #5 mAP@0.50: 0.9992955327033997
+Took 0.892 minutes for epoch 4
+
+BEST VALIDATION mAP: 0.6064222455024719
+
+SAVING BEST MODEL FOR EPOCH: 5
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 6 of 20
+Training
+Loss: 1.4132: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:33<00:00,  2.23s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.87s/it]
+Epoch #6 train loss: 1.497
+Epoch #6 mAP@0.50:0.95: 0.5764185786247253
+Epoch #6 mAP@0.50: 0.9994106292724609
+Took 0.962 minutes for epoch 5
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 7 of 20
+Training
+Loss: 1.1787: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.97s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.83s/it]
+Epoch #7 train loss: 1.287
+Epoch #7 mAP@0.50:0.95: 0.6019672155380249
+Epoch #7 mAP@0.50: 1.0
+Took 0.894 minutes for epoch 6
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 8 of 20
+Training
+Loss: 1.1907: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.95s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:22<00:00,  3.83s/it]
+Epoch #8 train loss: 1.165
+Epoch #8 mAP@0.50:0.95: 0.6741554737091064
+Epoch #8 mAP@0.50: 1.0
+Took 0.888 minutes for epoch 7
+
+BEST VALIDATION mAP: 0.6741554737091064
+
+SAVING BEST MODEL FOR EPOCH: 8
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 9 of 20
+Training
+Loss: 0.9812: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.95s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.83s/it]
+Epoch #9 train loss: 0.998
+Epoch #9 mAP@0.50:0.95: 0.6734327673912048
+Epoch #9 mAP@0.50: 1.0
+Took 0.889 minutes for epoch 8
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 10 of 20
+Training
+Loss: 0.9183: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:28<00:00,  1.93s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.84s/it]
+Epoch #10 train loss: 0.977
+Epoch #10 mAP@0.50:0.95: 0.6419764161109924
+Epoch #10 mAP@0.50: 1.0
+Took 0.885 minutes for epoch 9
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 11 of 20
+Training
+Loss: 1.1104: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:28<00:00,  1.93s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.87s/it]
+Epoch #11 train loss: 0.835
+Epoch #11 mAP@0.50:0.95: 0.6927171945571899
+Epoch #11 mAP@0.50: 1.0
+Took 0.888 minutes for epoch 10
+
+BEST VALIDATION mAP: 0.6927171945571899
+
+SAVING BEST MODEL FOR EPOCH: 11
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 12 of 20
+Training
+Loss: 0.7241: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.95s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.84s/it]
+Epoch #12 train loss: 0.760
+Epoch #12 mAP@0.50:0.95: 0.7055178284645081
+Epoch #12 mAP@0.50: 1.0
+Took 0.890 minutes for epoch 11
+
+BEST VALIDATION mAP: 0.7055178284645081
+
+SAVING BEST MODEL FOR EPOCH: 12
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 13 of 20
+Training
+Loss: 0.7441: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.94s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:22<00:00,  3.79s/it]
+Epoch #13 train loss: 0.725
+Epoch #13 mAP@0.50:0.95: 0.7239350080490112
+Epoch #13 mAP@0.50: 1.0
+Took 0.883 minutes for epoch 12
+
+BEST VALIDATION mAP: 0.7239350080490112
+
+SAVING BEST MODEL FOR EPOCH: 13
+
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 14 of 20
+Training
+Loss: 0.5584: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:28<00:00,  1.89s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:21<00:00,  3.63s/it]
+Epoch #14 train loss: 0.690
+Epoch #14 mAP@0.50:0.95: 0.6994604468345642
+Epoch #14 mAP@0.50: 1.0
+Took 0.853 minutes for epoch 13
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 15 of 20
+Training
+Loss: 0.8778: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:28<00:00,  1.88s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:22<00:00,  3.74s/it]
+Epoch #15 train loss: 0.656
+Epoch #15 mAP@0.50:0.95: 0.6638427972793579
+Epoch #15 mAP@0.50: 1.0
+Took 0.862 minutes for epoch 14
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 16 of 20
+Training
+Loss: 0.6233: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:28<00:00,  1.88s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:22<00:00,  3.73s/it]
+Epoch #16 train loss: 0.623
+Epoch #16 mAP@0.50:0.95: 0.6812188029289246
+Epoch #16 mAP@0.50: 1.0
+Took 0.860 minutes for epoch 15
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 17 of 20
+Training
+Loss: 0.5491: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.99s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.88s/it]
+Epoch #17 train loss: 0.612
+Epoch #17 mAP@0.50:0.95: 0.6918572187423706
+Epoch #17 mAP@0.50: 1.0
+Took 0.904 minutes for epoch 16
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 18 of 20
+Training
+Loss: 0.7634: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.95s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.89s/it]
+Epoch #18 train loss: 0.565
+Epoch #18 mAP@0.50:0.95: 0.6980569958686829
+Epoch #18 mAP@0.50: 1.0
+Took 0.895 minutes for epoch 17
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 19 of 20
+Training
+Loss: 0.5203: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.95s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.88s/it]
+Epoch #19 train loss: 0.550
+Epoch #19 mAP@0.50:0.95: 0.7169407606124878
+Epoch #19 mAP@0.50: 1.0
+Took 0.894 minutes for epoch 18
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.
+
+EPOCH 20 of 20
+Training
+Loss: 0.6253: 100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:29<00:00,  1.95s/it] 
+Validating
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:23<00:00,  3.84s/it]
+Epoch #20 train loss: 0.528
+Epoch #20 mAP@0.50:0.95: 0.7209817171096802
+Epoch #20 mAP@0.50: 1.0
+Took 0.891 minutes for epoch 19
+SAVING PLOTS COMPLETE...
+Adjusting learning rate of group 0 to 5.0000e-04.

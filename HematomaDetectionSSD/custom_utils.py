@@ -3,11 +3,14 @@ import cv2
 import numpy as np
 import torch
 import matplotlib.pyplot as plt
+
 from albumentations.pytorch import ToTensorV2
 from config import DEVICE, CLASSES
+
 plt.style.use('ggplot')
-# this class keeps track of the training and validation loss values...
-# ... and helps to get the average for each epoch as well
+
+# This class keeps track of the training and validation loss values
+# and helps to get the average for each epoch as well.
 class Averager:
     def __init__(self):
         self.current_total = 0.0
@@ -27,30 +30,6 @@ class Averager:
     def reset(self):
         self.current_total = 0.0
         self.iterations = 0.0
-# class SaveBestModel:
-#     """
-#     Class to save the best model while training. If the current epoch's 
-#     validation loss is less than the previous least less, then save the
-#     model state.
-#     """
-#     def __init__(
-#         self, best_valid_loss=float('inf')
-#     ):
-#         self.best_valid_loss = best_valid_loss
-        
-#     def __call__(
-#         self, current_valid_loss, 
-#         epoch, model, optimizer
-#     ):
-#         if current_valid_loss < self.best_valid_loss:
-#             self.best_valid_loss = current_valid_loss
-#             print(f"\nBest validation loss: {self.best_valid_loss}")
-#             print(f"\nSaving best model for epoch: {epoch+1}\n")
-#             torch.save({
-#                 'epoch': epoch+1,
-#                 'model_state_dict': model.state_dict(),
-#                 'optimizer_state_dict': optimizer.state_dict(),
-#                 }, 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/hematoma-localization-and-spinal-cord-segmentation/HematomaDetectionRCNN/outputs/best_model.pth')
 
 class SaveBestModel:
     """
@@ -77,28 +56,33 @@ class SaveBestModel:
             torch.save({
                 'epoch': epoch+1,
                 'model_state_dict': model.state_dict(),
-                }, f'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/hematoma-localization-and-spinal-cord-segmentation/HematomaDetectionRCNN/outputs/best_model.pth')
-            
+                }, f"{OUT_DIR}/best_model.pth")
+
 def collate_fn(batch):
     """
     To handle the data loading as different images may have different number 
     of objects and to handle varying size tensors as well.
     """
     return tuple(zip(*batch))
-# define the training tranforms
+
+# Define the training tranforms.
 def get_train_transform():
     return A.Compose([
-        A.Flip(0.5),
-        A.RandomRotate90(0.5),
-        A.MotionBlur(p=0.2),
-        A.MedianBlur(blur_limit=3, p=0.1),
+        A.HorizontalFlip(p=0.5),
         A.Blur(blur_limit=3, p=0.1),
+        A.MotionBlur(blur_limit=3, p=0.1),
+        A.MedianBlur(blur_limit=3, p=0.1),
+        A.ToGray(p=0.3),
+        A.RandomBrightnessContrast(p=0.3),
+        A.ColorJitter(p=0.3),
+        A.RandomGamma(p=0.3),
         ToTensorV2(p=1.0),
     ], bbox_params={
         'format': 'pascal_voc',
         'label_fields': ['labels']
     })
-# define the validation transforms
+
+# Define the validation transforms.
 def get_valid_transform():
     return A.Compose([
         ToTensorV2(p=1.0),
@@ -106,6 +90,8 @@ def get_valid_transform():
         'format': 'pascal_voc', 
         'label_fields': ['labels']
     })
+
+
 def show_tranformed_image(train_loader):
     """
     This function shows the transformed images from the `train_loader`.
@@ -121,6 +107,7 @@ def show_tranformed_image(train_loader):
             boxes = targets[i]['boxes'].cpu().numpy().astype(np.int32)
             labels = targets[i]['labels'].cpu().numpy().astype(np.int32)
             sample = images[i].permute(1, 2, 0).cpu().numpy()
+            sample = cv2.cvtColor(sample, cv2.COLOR_RGB2BGR)
             for box_num, box in enumerate(boxes):
                 cv2.rectangle(sample,
                             (box[0], box[1]),
@@ -132,6 +119,7 @@ def show_tranformed_image(train_loader):
             cv2.imshow('Transformed image', sample)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
+
 def save_model(epoch, model, optimizer):
     """
     Function to save the trained model till current epoch, or whenver called
@@ -140,18 +128,47 @@ def save_model(epoch, model, optimizer):
                 'epoch': epoch+1,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
-                }, 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/hematoma-localization-and-spinal-cord-segmentation/HematomaDetectionRCNN/outputs/last_model.pth')
+                }, 'outputs/last_model.pth')
+
+def save_loss_plot(
+    OUT_DIR, 
+    train_loss_list, 
+    x_label='iterations',
+    y_label='train loss',
+    save_name='train_loss'
+):
+    """
+    Function to save both train loss graph.
     
-def save_loss_plot(OUT_DIR, train_loss, val_loss):
-    figure_1, train_ax = plt.subplots()
-    figure_2, valid_ax = plt.subplots()
-    train_ax.plot(train_loss, color='tab:blue')
-    train_ax.set_xlabel('iterations')
-    train_ax.set_ylabel('train loss')
-    valid_ax.plot(val_loss, color='tab:red')
-    valid_ax.set_xlabel('iterations')
-    valid_ax.set_ylabel('validation loss')
-    figure_1.savefig(f"{OUT_DIR}/train_loss.png")
-    figure_2.savefig(f"{OUT_DIR}/valid_loss.png")
+    :param OUT_DIR: Path to save the graphs.
+    :param train_loss_list: List containing the training loss values.
+    """
+    figure_1 = plt.figure(figsize=(10, 7), num=1, clear=True)
+    train_ax = figure_1.add_subplot()
+    train_ax.plot(train_loss_list, color='tab:blue')
+    train_ax.set_xlabel(x_label)
+    train_ax.set_ylabel(y_label)
+    figure_1.savefig(f"{OUT_DIR}/{save_name}.png")
     print('SAVING PLOTS COMPLETE...')
-    plt.close('all')
+
+def save_mAP(OUT_DIR, map_05, map):
+    """
+    Saves the mAP@0.5 and mAP@0.5:0.95 per epoch.
+    :param OUT_DIR: Path to save the graphs.
+    :param map_05: List containing mAP values at 0.5 IoU.
+    :param map: List containing mAP values at 0.5:0.95 IoU.
+    """
+    figure = plt.figure(figsize=(10, 7), num=1, clear=True)
+    ax = figure.add_subplot()
+    ax.plot(
+        map_05, color='tab:orange', linestyle='-', 
+        label='mAP@0.5'
+    )
+    ax.plot(
+        map, color='tab:red', linestyle='-', 
+        label='mAP@0.5:0.95'
+    )
+    ax.set_xlabel('Epochs')
+    ax.set_ylabel('mAP')
+    ax.legend()
+    figure.savefig(f"{OUT_DIR}/map.png")
