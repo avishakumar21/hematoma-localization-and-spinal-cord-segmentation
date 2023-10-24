@@ -16,6 +16,6 @@ CLASSES = [
 ]
 NUM_CLASSES = len(CLASSES)
 # whether to visualize images after crearing the data loaders
-VISUALIZE_TRANSFORMED_IMAGES = False
+VISUALIZE_TRANSFORMED_IMAGES = True
 # location to save model and plots
 OUT_DIR = 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/hematoma-localization-and-spinal-cord-segmentation/HematomaDetectionRCNN/outputs'
