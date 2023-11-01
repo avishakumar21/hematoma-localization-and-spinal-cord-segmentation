@@ -133,6 +133,7 @@ def validate(valid_data_loader, model):
 
 
 if __name__ == '__main__':
+    print(DEVICE)
     train_dataset = create_train_dataset()
     valid_dataset = create_valid_dataset()
     train_loader = create_train_loader(train_dataset, NUM_WORKERS)

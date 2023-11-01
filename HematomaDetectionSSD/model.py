@@ -6,7 +6,7 @@ from torchvision.models.detection.ssd import (
     SSDHead
 )
 
-def create_model(num_classes=2, size=300, nms=0.45):
+def create_model(num_classes=2, size=300, nms=0.45):  ###
     # Load the ResNet-50 pretrained model
     model_backbone = torchvision.models.resnet50(pretrained=True)
     
