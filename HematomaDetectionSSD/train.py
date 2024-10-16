@@ -3,6 +3,7 @@ from config import (
     NUM_CLASSES, 
     NUM_EPOCHS, 
     OUT_DIR,
+    LR,
     VISUALIZE_TRANSFORMED_IMAGES, 
     NUM_WORKERS,
     RESIZE_TO,
@@ -12,6 +13,7 @@ from config import (
 # from torch_utils.engine import (
 #     train_one_epoch, evaluate
 # )
+import nni
 from model import create_model
 from custom_utils import (
     Averager, 
@@ -111,7 +113,7 @@ def validate(valid_data_loader, model):
     return metric_summary
 
 if __name__ == '__main__':
-    os.makedirs('outputs', exist_ok=True)
+    os.makedirs('outputs_512', exist_ok=True)
     train_dataset = create_train_dataset(TRAIN_DIR)
     valid_dataset = create_valid_dataset(VALID_DIR)
     train_loader = create_train_loader(train_dataset, NUM_WORKERS)
@@ -130,8 +132,16 @@ if __name__ == '__main__':
         p.numel() for p in model.parameters() if p.requires_grad)
     print(f"{total_trainable_params:,} training parameters.")
     params = [p for p in model.parameters() if p.requires_grad]
+
+
+
+
+    # optimizer = torch.optim.SGD(
+    #     params, lr=0.0005, momentum=0.9, nesterov=True
+    # )
+
     optimizer = torch.optim.SGD(
-        params, lr=0.0005, momentum=0.9, nesterov=True
+        params, lr=LR, momentum=0.9, nesterov=True
     )
     scheduler = MultiStepLR(
         optimizer=optimizer, milestones=[45], gamma=0.1, verbose=True
@@ -143,14 +153,20 @@ if __name__ == '__main__':
     train_loss_list = []
     map_50_list = []
     map_list = []
+    map_75_list = []
+    mar_1_list = []
+    mar_10_list = []
+    mar_large_list = []
+    mar_medium_list = []
+    mar_small_list = []
 
     # Mame to save the trained model with.
     MODEL_NAME = 'model'
 
     # Whether to show transformed images from data loader or not.
-    if VISUALIZE_TRANSFORMED_IMAGES:
-        from custom_utils import show_tranformed_image
-        show_tranformed_image(train_loader)
+    # if VISUALIZE_TRANSFORMED_IMAGES:
+    #     from custom_utils import show_tranformed_image
+    #     show_tranformed_image(train_loader)
 
     # To save best model.
     save_best_model = SaveBestModel()
@@ -179,15 +195,47 @@ if __name__ == '__main__':
         end = time.time()
         print(f"Took {((end - start) / 60):.3f} minutes for epoch {epoch}")
 
+
+        map = float(metric_summary['map'])
+        # print(f'MAP50: {map50}')
+
+        ##### NNI #############
+
+        # nni.report_intermediate_result(map)
+
+        # if epoch == NUM_EPOCHS -1:
+        #     nni.report_final_result(map)
+
+        ###### NNI #############
+
         train_loss_list.append(train_loss)
-        map_50_list.append(metric_summary['map_50'])
-        map_list.append(metric_summary['map'])
+        map_50_list.append(float(metric_summary['map_50']))
+        map_list.append(float(metric_summary['map']))
+        map_75_list.append(float(metric_summary['map_75']))
+        mar_1_list.append(float(metric_summary['mar_1']))
+        mar_10_list.append(float(metric_summary['mar_10']))
+        mar_large_list.append(float(metric_summary['mar_large']))
+        mar_medium_list.append(float(metric_summary['mar_medium']))
+        mar_small_list.append(float(metric_summary['mar_small']))
+
+        if epoch == NUM_EPOCHS -1:
+            print(f'train_loss: {train_loss_list}')
+            print(f'MAP50: {map_50_list}')
+            print(f'MAP: {map_list}')
+            print(f'MAP75: {map_75_list}')
+            print(f'MAR1: {mar_1_list}')
+            print(f'MAR10: {mar_10_list}')
+            print(f'MAR_large: {mar_large_list}')
+            print(f'MAR_medium: {mar_medium_list}')
+            print(f'MAR_small: {mar_small_list}')
+
+
 
         #evaluate(model, valid_loader, device=DEVICE)
 
         # save the best model till now.
         save_best_model(
-            model, float(metric_summary['map']), epoch, 'outputs'
+            model, float(metric_summary['map']), epoch, 'outputs_512'
         )
         # Save the current epoch model.
         save_model(epoch, model, optimizer)

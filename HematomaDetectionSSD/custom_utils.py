@@ -128,7 +128,7 @@ def save_model(epoch, model, optimizer):
                 'epoch': epoch+1,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
-                }, 'outputs/last_model.pth')
+                }, 'outputs_512/last_model.pth')
 
 def save_loss_plot(
     OUT_DIR, 

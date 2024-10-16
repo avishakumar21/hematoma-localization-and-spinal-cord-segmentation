@@ -188,7 +188,7 @@ if __name__ == '__main__':
         TRAIN_DIR, RESIZE_TO, RESIZE_TO, CLASSES
     )
     print(f"Number of training images: {len(dataset)}")
-    
+    print(f"batch size in train loader check: {BATCH_SIZE}")
     # function to visualize a single sample
     def visualize_sample(image, target):
         for box_num in range(len(target['boxes'])):
