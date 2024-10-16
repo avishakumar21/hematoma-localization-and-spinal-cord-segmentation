@@ -1,8 +1,9 @@
 from config import (
-    DEVICE, NUM_CLASSES, NUM_EPOCHS, OUT_DIR,
+    DEVICE, NUM_CLASSES, NUM_EPOCHS, OUT_DIR, LR, BATCH_SIZE, 
     VISUALIZE_TRANSFORMED_IMAGES, NUM_WORKERS, CLASSES
 )
 
+import nni
 from engine import evaluate
 from model import create_model
 from custom_utils import Averager, SaveBestModel, save_model, save_loss_plot
@@ -19,7 +20,7 @@ import time
 from torchmetrics.detection.mean_ap import MeanAveragePrecision
 
 from config import (
-    NUM_CLASSES, DEVICE, CLASSES
+    NUM_CLASSES, DEVICE, CLASSES, RESIZE_TO
 )
 plt.style.use('ggplot')
 
@@ -127,15 +128,11 @@ def validate(valid_data_loader, model):
     return metric_summary
 
 
-
-
-  
-
-
 if __name__ == '__main__':
     print(DEVICE)
     train_dataset = create_train_dataset()
     valid_dataset = create_valid_dataset()
+
     train_loader = create_train_loader(train_dataset, NUM_WORKERS)
     valid_loader = create_valid_loader(valid_dataset, NUM_WORKERS)
     print(f"Number of training samples: {len(train_dataset)}")
@@ -145,8 +142,16 @@ if __name__ == '__main__':
     model = model.to(DEVICE)
     # get the model parameters
     params = [p for p in model.parameters() if p.requires_grad]
+
+
+    total_params = sum(p.numel() for p in model.parameters())
+    print(f"{total_params:,} total parameters.")
+    total_trainable_params = sum(
+        p.numel() for p in model.parameters() if p.requires_grad)
+    print(f"{total_trainable_params:,} training parameters.")
+
     # define the optimizer
-    optimizer = torch.optim.SGD(params, lr=0.001, momentum=0.9, weight_decay=0.0005)
+    optimizer = torch.optim.SGD(params, lr=LR, momentum=0.9, weight_decay=0.0005)
     # initialize the Averager class
     train_loss_hist = Averager()
     val_loss_hist = Averager()
@@ -156,16 +161,26 @@ if __name__ == '__main__':
     # ... iterations till ena and plot graphs for all iterations
     train_loss_list = []
     val_loss_list = []
+    map_50_list = []
+    map_list = []
+    map_75_list = []
+    mar_1_list = []
+    mar_10_list = []
+    mar_large_list = []
+    mar_medium_list = []
+    mar_small_list = []
+
 
 
     # name to save the trained model with
     MODEL_NAME = 'model'
     # whether to show transformed images from data loader or not
-    if VISUALIZE_TRANSFORMED_IMAGES:
-        from custom_utils import show_tranformed_image
-        show_tranformed_image(train_loader)
+    # if VISUALIZE_TRANSFORMED_IMAGES:
+    #     from custom_utils import show_tranformed_image
+    #     show_tranformed_image(train_loader)
     # initialize SaveBestModel class
     save_best_model = SaveBestModel()
+
 
     # start the training epochs
     for epoch in range(NUM_EPOCHS):
@@ -200,6 +215,41 @@ if __name__ == '__main__':
         # )
 
                 # save the best model till now.
+      
+        map = float(metric_summary['map'])
+        print(f'MAP: {map}')
+
+        ##### NNI #############
+
+        # nni.report_intermediate_result(map)
+
+        # if epoch == NUM_EPOCHS -1:
+        #     nni.report_final_result(map)
+
+
+        ###### NNI #############  
+
+        train_loss_list.append(train_loss_hist.value)
+        map_50_list.append(float(metric_summary['map_50']))
+        map_list.append(float(metric_summary['map']))
+        map_75_list.append(float(metric_summary['map_75']))
+        mar_1_list.append(float(metric_summary['mar_1']))
+        mar_10_list.append(float(metric_summary['mar_10']))
+        mar_large_list.append(float(metric_summary['mar_large']))
+        mar_medium_list.append(float(metric_summary['mar_medium']))
+        mar_small_list.append(float(metric_summary['mar_small']))
+
+        if epoch == NUM_EPOCHS -1:
+            #print(f'train_loss: {train_loss_list}')
+            print(f'MAP50: {map_50_list}')
+            print(f'MAP: {map_list}')
+            print(f'MAP75: {map_75_list}')
+            print(f'MAR1: {mar_1_list}')
+            print(f'MAR10: {mar_10_list}')
+            print(f'MAR_large: {mar_large_list}')
+            print(f'MAR_medium: {mar_medium_list}')
+            print(f'MAR_small: {mar_small_list}')   
+        
         save_best_model(
             model, float(metric_summary['map']), epoch, 'outputs'
         )
@@ -244,6 +294,3 @@ if __name__ == '__main__':
     # plt.legend()
     # plt.grid(True)
     # plt.show()
-
-
-

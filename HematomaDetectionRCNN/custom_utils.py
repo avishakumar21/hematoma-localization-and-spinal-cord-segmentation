@@ -77,7 +77,7 @@ class SaveBestModel:
             torch.save({
                 'epoch': epoch+1,
                 'model_state_dict': model.state_dict(),
-                }, f'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/hematoma-localization-and-spinal-cord-segmentation/HematomaDetectionRCNN/outputs/best_model.pth')
+                }, f'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/HematomaDetectionRCNN/outputs/best_model.pth')
             
 def collate_fn(batch):
     """
@@ -140,7 +140,7 @@ def save_model(epoch, model, optimizer):
                 'epoch': epoch+1,
                 'model_state_dict': model.state_dict(),
                 'optimizer_state_dict': optimizer.state_dict(),
-                }, 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/hematoma-localization-and-spinal-cord-segmentation/HematomaDetectionRCNN/outputs/last_model.pth')
+                }, 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/HematomaDetectionRCNN/outputs/last_model.pth')
     
 def save_loss_plot(OUT_DIR, train_loss, val_loss):
     figure_1, train_ax = plt.subplots()

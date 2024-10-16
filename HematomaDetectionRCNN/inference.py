@@ -4,7 +4,10 @@ import torch
 import glob as glob
 import os
 import time
+import psutil
 from model import create_model
+import subprocess
+from statistics import mean
 from config import (
     NUM_CLASSES, DEVICE, NUM_WORKERS, CLASSES
 )
@@ -15,18 +18,36 @@ from datasets import (
 
 from torchmetrics.detection.mean_ap import MeanAveragePrecision
 
+def get_gpu_load():
+    """
+    Returns the current GPU utilization as a string percentage.
+    """
+    result = subprocess.check_output(
+        ['nvidia-smi', '--query-gpu=utilization.gpu', '--format=csv,noheader,nounits'],
+        encoding='utf-8'
+    )
+    return result.strip()
+
+
 def test(test_data_loader, model):
     print('Testing')
     model.eval()
     target = []
     preds = []
-    # initialize tqdm progress bar
-    
+
+    time.sleep(3)
+    cpu_usage_before = psutil.cpu_percent(interval=None)
+    gpu_load_before = get_gpu_load() if torch.cuda.is_available() else "N/A"
+    cpu_list = []
+    gpu_list = []
     for i, data in enumerate(test_data_loader):
         images, targets = data
-        
+        #images = [cv2.resize(image, (640, 640)) for image in images]
+
         images = list(image.to(DEVICE) for image in images)
         targets = [{k: v.to(DEVICE) for k, v in t.items()} for t in targets]
+        
+        
         for t in targets:
             if t['boxes'].size() == torch.Size([0]):
                 boxes = torch.zeros((0, 4), dtype=torch.float32)
@@ -39,11 +60,15 @@ def test(test_data_loader, model):
                 t["labels"] = labels.to(DEVICE)
                 t["area"] = area.to(DEVICE)
                 t["iscrowd"] = iscrowd.to(DEVICE)
+
         
         with torch.no_grad():
             outputs = model(images, targets)
-
-
+            cpu_usage_after = psutil.cpu_percent(interval=None)
+            gpu_load_after = get_gpu_load() if torch.cuda.is_available() else "N/A"
+            
+        cpu_list.append(cpu_usage_after)
+        gpu_list.append(int(gpu_load_after))
         # For mAP calculation using Torchmetrics.
         #####################################
         for i in range(len(images)):
@@ -55,8 +80,16 @@ def test(test_data_loader, model):
             preds_dict['scores'] = outputs[i]['scores'].detach().cpu()
             preds_dict['labels'] = outputs[i]['labels'].detach().cpu()
             preds.append(preds_dict)
-            target.append(true_dict)
+            target.append(true_dict) 
         #####################################
+    cpu_usage_avg = mean(cpu_list)
+    cpu_usage_diff = cpu_usage_avg - cpu_usage_before
+    print(f"CPU usage increase due to inference in test function: {cpu_usage_diff}%")
+
+    gpu_useage_avg = mean(gpu_list)
+    print(f"GPU Load before execution: {gpu_load_before}%")
+    print(f"GPU Load after execution: {gpu_useage_avg}%")
+
 
     metric = MeanAveragePrecision()
     metric.update(preds, target)
@@ -65,24 +98,22 @@ def test(test_data_loader, model):
 
 if __name__ == '__main__':
 
-
     # this will help us create a different color for each class
     COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 
     # load the best model and trained weights
     model = create_model(num_classes=NUM_CLASSES)
-    checkpoint = torch.load('C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/hematoma-localization-and-spinal-cord-segmentation/HematomaDetectionRCNN/outputs/best_model.pth', map_location=DEVICE)
+    checkpoint = torch.load('C:/Users/akumar80/Documents/Avisha Kumar Lab Work/HematomaDetectionRCNN/outputs/best_model.pth', map_location=DEVICE)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.to(DEVICE).eval()
 
-
     # directory where all the images are present
-    DIR_TEST = 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/ModelData/test'
+    DIR_TEST = 'C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/test'
     test_images = glob.glob(f"{DIR_TEST}/*.png")
     print(f"Test instances: {len(test_images)}")
     # define the detection threshold...
     # ... any detection having score below this will be discarded
-    detection_threshold = 0.8
+    detection_threshold = 0.5 #0.8
     # to count the total number of images iterated through
     frame_count = 0
     # to keep adding the FPS for each image
@@ -103,6 +134,12 @@ if __name__ == '__main__':
     print(f"mAR@medium: {metric_summary['mar_medium']}")  
     print(f"mAR@small: {metric_summary['mar_small']}")
 
+    time.sleep(3)
+    cpu_usage_before = psutil.cpu_percent(interval=None)
+    gpu_load_before = get_gpu_load() if torch.cuda.is_available() else "N/A"
+    cpu_list = []
+    gpu_list = []
+
     for i in range(len(test_images)):
         # get the image file name for saving output later on
         image_name = test_images[i].split(os.path.sep)[-1].split('.')[0]
@@ -121,7 +158,13 @@ if __name__ == '__main__':
         start_time = time.time()
         with torch.no_grad():
             outputs = model(image.to(DEVICE))
+            cpu_usage_after = psutil.cpu_percent(interval=None)
+            gpu_load_after = get_gpu_load() if torch.cuda.is_available() else "N/A"
+            
+        cpu_list.append(cpu_usage_after)
+        gpu_list.append(int(gpu_load_after))
         end_time = time.time()
+        
         # get the current fps
         fps = 1 / (end_time - start_time)
         # add `fps` to `total_fps`
@@ -141,7 +184,7 @@ if __name__ == '__main__':
             # get all the predicited class names
             pred_classes = [CLASSES[i] for i in outputs[0]['labels'].cpu().numpy()]
             
-            # draw the bounding boxes and write the class name on top of it
+            # # draw the bounding boxes and write the class name on top of it
             for j, box in enumerate(draw_boxes):
                 class_name = pred_classes[j]
                 color = COLORS[CLASSES.index(class_name)]
@@ -155,7 +198,7 @@ if __name__ == '__main__':
                             2, lineType=cv2.LINE_AA)
             cv2.imshow('Prediction', orig_image)
             cv2.waitKey(1)
-            cv2.imwrite(f"C:/Users/akumar80/Documents/Avisha Kumar Lab Work/hematoma localization/hematoma-localization-and-spinal-cord-segmentation/HematomaDetectionRCNN/inference_outputs/images/{image_name}.png", orig_image)
+            cv2.imwrite(f"C:/Users/akumar80/Documents/Avisha Kumar Lab Work/HematomaDetectionRCNN/inference_outputs/images/{image_name}.png", orig_image)
         print(f"Image {i+1} done...")
         print('-'*50)
     print('TEST PREDICTIONS COMPLETE')
@@ -163,3 +206,10 @@ if __name__ == '__main__':
     # calculate and print the average FPS
     avg_fps = total_fps / frame_count
     print(f"Average FPS: {avg_fps:.3f}")
+    cpu_usage_avg = mean(cpu_list)
+    cpu_usage_diff = cpu_usage_avg - cpu_usage_before
+    print(f"CPU usage increase due to inference in test function: {cpu_usage_diff}%")
+
+    gpu_useage_avg = mean(gpu_list)
+    print(f"GPU Load before execution: {gpu_load_before}%")
+    print(f"GPU Load after execution: {gpu_useage_avg}%")
