@@ -1,23 +1,20 @@
 from ultralytics import YOLO
 
+def run_predict(imagepath):
 
-model = YOLO("C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/runs/detect/train4/weights/best.pt")
+    model = YOLO("runs/detect/train3/weights/best.pt")
 
-# results = model(
-#     "C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/custom_data/images/test",
-#     save=True,
-#     max_det=1,
-#     save_crop=True,
-#     device="0",
-#     )
-
-results = model(
-    "C:/Users/kkotkar1/Desktop/DicomScaling/ScaledImages25",
-    save=True,
-    max_det=1,
-    save_crop=True,
-    device="0",
-    )
-
+    results = model(
+        imagepath,
+        save=True,
+        max_det=1,
+        device="0",
+        save_txt=True,
+        conf=0.7,
+        )
 
 # results = model("C:/Users/kkotkar1/Desktop/CropAllDicoms/DicomSlicesPNG", save=True)
+
+if __name__ == "__main__":
+    ippath = 'custom_data_prepost/images/test'
+    run_predict(ippath)

@@ -1,4 +1,4 @@
-path: C:/Users/kkotkar1/Desktop/HematomaDetection/yolov8/custom_data
+path: D:/PreAndPostInjuryYolo/custom_data_prepost
 train: images/train
 val: images/val
 test: images/test
